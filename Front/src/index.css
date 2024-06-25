@@ -1,0 +1,14 @@
+@media (min-widht: 769px) and (max-width: 1024px){
+	/* Estilizações CSS */
+}
+
+.min-height-500 {
+    min-height: 800px;
+}
+
+.form-container {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
