@@ -87,7 +87,33 @@ const RegisterUser = () => {
                     <label htmlFor="inputState" className="form-label">Estado</label>
                     <select id="inputState" className="form-select">
                         <option selected>Escolha...</option>
-                        <option>...</option>
+                        <option>Acre</option>
+                        <option>Alagoas</option>
+                        <option>Amapá</option>
+                        <option>Amazonas</option>
+                        <option>Bahia</option>
+                        <option>Ceará</option>
+                        <option>Distrito Federal</option>
+                        <option>Espírito Santo</option>
+                        <option>Goiás</option>
+                        <option>Maranhão</option>
+                        <option>Mato Grosso</option>
+                        <option>Mato Grosso do Sul</option>
+                        <option>Minas Gerais</option>
+                        <option>Pará</option>
+                        <option>Paraíba</option>
+                        <option>Paraná</option>
+                        <option>Pernanmbuco</option>
+                        <option>Piauí</option>
+                        <option>Rio De Janeiro</option>
+                        <option>Rio Grande do Norte</option>
+                        <option>Rio Grande do Sul</option>
+                        <option>Rondônia</option>
+                        <option>Roaraima</option>
+                        <option>Santa Catarina</option>
+                        <option>São Paulo</option>
+                        <option>Sergipe</option>
+                        <option>Tocantis</option>
                     </select>
                 </div>
                 <div className="mb-3" style={{ maxWidth: '150px' }}>
