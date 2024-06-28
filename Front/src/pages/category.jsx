@@ -2,14 +2,14 @@
 import { useParams } from "react-router-dom"
 import Header from "../componentes/header"
 import Footer from "../componentes/footer"
-import ImgHome from "../componentes/imgHome"
+import Products from "../componentes/products"
 
 
 const Category = () => {
     return (
       <div>
         <Header />        
-        <ImgHome />
+        <Products />
         <Footer />
       </div>
     );

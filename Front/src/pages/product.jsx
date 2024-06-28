@@ -1,11 +1,17 @@
-import { useParams } from "react-router-dom";
-import { json, redirect, useNavigate } from "react-router-dom";
+// import { useParams } from "react-router-dom";
+// import { json, redirect, useNavigate } from "react-router-dom";
+// import Header from "../componentes/header"
+ import React, { useState, useEffect } from 'react';
+// import "../css/product.css"
+// import { useEffect } from "react"
+import { useParams } from "react-router-dom"
 import Header from "../componentes/header"
-import React, { useState, useEffect } from 'react';
-
+import Footer from "../componentes/footer"
 
 const Product = () => {
-    const [useJSON, setUseJSON] = useState([]);
+    const [useProduct, setUseProduct] = useState([]);
+    const [useSeller, setUseSeller] = useState([]);
+    const [useProposal, setUseProposal] = useState([]);
     const params = useParams();
 
     useEffect(() => {
@@ -19,14 +25,16 @@ const Product = () => {
                 const seller = ret.seller;
                 const proposal = ret.proposal;
                 console.log(photoA)
-                setUseJSON(product, seller, proposal);
+                setUseProduct(product);
+                setUseSeller(seller);
+                setUseProposal(proposal);
             }
             )
             .catch((err) => {
                 console.log(err);
             })
 
-        // }, [useJSON.length]);
+        // }, [useProduct.length]);
     }, []);
 
 
@@ -34,32 +42,54 @@ const Product = () => {
 
     return (
         <div>
+            <Header />
             <div style={{ minHeight: '100vh' }}>
-                <Header />
-                <h1>{useJSON.title}</h1>
+                
+                <div className="product">
+                    <h1>{useProduct.title}</h1>
 
-                <img src={`/src/assets/ImgDosProdutos/${useJSON.photo}`} />
-                
-                <span>
-                    <h2>Categoria:</h2>
-               
-                
-                    <h3>{useJSON.category}</h3>
+                    <img src={`/src/assets/ImgDosProdutos/${useProduct.photo}`} />
+
+                    <span>
+                        <h2>Categoria:</h2>
+
+
+                        <h3>{useProduct.category}</h3>
                     </span>
-                <span>
-                    <h2>Descrição:</h2>
-               
-                    <h3>{useJSON.description}</h3>
-               
+                    <span>
+                        <h2>Descrição:</h2>
+
+                        <h3>{useProduct.description}</h3>
+
                     </span>
-               
-                <span>
-                    <h2>Localização:</h2>
-               
-                    <h3>{useJSON.zip} /{useJSON.city} / {useJSON.useEffect} </h3>
+
+
+
+                </div>
+                <div className="box">
+
+                    <span>
+                        <h2>Localização:</h2>
+
+                        <h3>{useSeller.cep} /{useSeller.city} / {useSeller.uf} </h3>
                     </span>
-               
+                    <div className="new" id="new">
+                        <button>Fazer Proposta</button>
+                    </div>
+                    <div className="proposal" id="proposal">
+                        <label htmlFor="">Insira sua proposta para este Anúncio:</label>
+                        <input type="text" placeholder="Insira sua proposta"></input>
+                        <label htmlFor="">Caso tenha o produto anunciado, insira p link</label>
+                        <input type="text" placeholder="Insira o link proposta"></input>
+                        <button>Enviar Proposta</button>
+                    </div>
+                    <div className="proposals" id="proposals">
+                        <h1>Propostas</h1>
+                        
+                    </div>
+                </div>
             </div>
+            <Footer />
         </div>
     )
 }

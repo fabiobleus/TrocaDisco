@@ -11,6 +11,7 @@ productRouter.delete("/product/:id", auth,  productController.productDelete);
 productRouter.get("/product/:id", productController.productGet);
 productRouter.get("/product/name/:productname", productController.productFindName);
 productRouter.get("/product/category/:category", productController.productFindCategory);
+productRouter.get("/product/category/:category/:id", productController.productFindCategory);
 productRouter.get("/product/user/:iduser", productController.productFindUser);
 productRouter.get("/products", productController.productGetAll);
 

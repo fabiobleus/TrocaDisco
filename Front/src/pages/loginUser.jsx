@@ -36,7 +36,7 @@ const LoginUser = () => {
             //     const se = await response.json()
             //     alert(se);
             //     // e.redirect('/login-user')
-            fetch('http://localhost:3000/api/login',options) // todos produtos
+            fetch('http://localhost:3000/api/login', options) // todos produtos
 
 
                 .then(async (response) => {
@@ -66,28 +66,28 @@ const LoginUser = () => {
 
 
     return (
-    <div className="min-height-500 d-flex flex-column align-items-center justify-content-center" style={{ minHeight: '50vh' }}>
-        <Header />
-        <div style={{ height: '2rem' }}></div>
-          <h1>Faça o Login</h1> 
-    <form className="form-container" style={{ maxWidth: '400px', width: '100%' }} onSubmit={handleSubmit}>
-        <div className="mb-3">
-            <label htmlFor="staticEmail2" className="form-label">Email:</label>
-            <input type="email" className="form-control" id="staticEmail2" placeholder="email@example.com" onChange={handleChange} value={FormLogin.email} name="email" />
+        <div className="min-height-500 d-flex flex-column align-items-center justify-content-center" style={{ minHeight: '50vh' }}>
+            <Header />
+            <div style={{ height: '2rem' }}></div>
+            <h1>Faça o Login</h1>
+            <form className="form-container" style={{ maxWidth: '400px', width: '100%' }} onSubmit={handleSubmit}>
+                <div className="mb-3">
+                    <label htmlFor="staticEmail2" className="form-label">Email:</label>
+                    <input type="email" className="form-control" id="staticEmail2" placeholder="email@example.com" onChange={handleChange} value={FormLogin.email} name="email" />
+                </div>
+
+                <div className="mb-3">
+                    <label htmlFor="inputPassword2" className="form-label">Senha:</label>
+                    <input type="password" className="form-control" id="inputPassword2" placeholder="Password" onChange={handleChange} value={FormLogin.password} name="password" />
+                </div>
+
+                <div className="d-grid">
+                    <button type="submit" className="btn btn-primary">Confirmar</button>
+                </div>
+            </form>
+            <Footer />
         </div>
 
-        <div className="mb-3">
-            <label htmlFor="inputPassword2" className="form-label">Senha:</label>
-            <input type="password" className="form-control" id="inputPassword2" placeholder="Password" onChange={handleChange} value={FormLogin.password} name="password"/>
-        </div>
-
-        <div className="d-grid">
-            <button type="submit" className="btn btn-primary">Confirmar</button>
-        </div>
-    </form>
-    <Footer />
-        </div>
-        
     );
 }
 

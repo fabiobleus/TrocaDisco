@@ -6,19 +6,48 @@ import { useState, useEffect } from "react";
 
 const ProductPage = () => {
   const navigate = useNavigate();
-  // const usid =  localStorage.getItem("tokenTD"))
-  console.log(localStorage.getItem("tokenTD"))
-  const [PhotoProduct, setPhotoProduct] = useState()
+  const [file, setFile] = useState('');
+  const [base64, setBase64] = useState('');
+
+  const [PhotoProduct, setPhotoProduct] = useState([]); // array para gravação da imagens
   const [FormProduct, setFormProduct] = useState({
     title: '',
     description: '',
-    category: '',
-    // userId : usid,
+    category: 'Vinil',
     photo: [],
     status: 'Ativo',
-    // idUser: localStorage.getItem("tokenTD")
 
   });
+  const base64Convert = (readerEvt) => {
+
+    let binaryString = readerEvt.target.result;
+    console.log('asdasdasd: ', readerEvt.result)
+    setBase64(btoa(binaryString))
+
+  }
+  const base64Desconvert = (file) => {
+    // let base64 = new File(readerEvt, atob(file), { type: 'image/png' })
+    //  const base64 =
+    return atob(file);
+  }
+
+  const photoUpload = (e) => {
+    e.preventDefault();
+    const reader = new FileReader();
+    const file = e.target.files[0];
+
+    reader.onload = () => {
+      setFile(reader.result);
+      const file64 = btoa(file);
+      setBase64(file64);
+      //  base64Convert(e)
+
+    };
+    // reader.readAsDataURL(file);
+
+    console.log(base64);
+    console.log(file64);
+  };
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormProduct({
@@ -48,10 +77,8 @@ const ProductPage = () => {
         alert('produt');
 
       } else {
-        const err = await response.json()
-        // alert(response.body);
-
-        console.log(FormProduct)
+        const err = await response.json();
+        console.log(FormProduct);
       }
     } catch (error) {
       alert('Erro! tente novamente.');
@@ -99,7 +126,8 @@ const ProductPage = () => {
         </div>
         <div className="mb-3">
           <label htmlFor="inputProductPhoto" className="form-label">Foto do Produto:</label>
-          <input type="file" className="form-control" onChange={handleChange} id="inputProductPhoto" />
+          <input type="file" className="form-control" onChange={photoUpload} id="inputProductPhoto" />
+          <img src={base64Desconvert(base64)} width={200} height={200} alt="" />
         </div>
         <div className="d-grid">
           <button type="submit" className="btn btn-primary">Cadastrar Anúncio</button>

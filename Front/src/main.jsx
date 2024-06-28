@@ -9,7 +9,6 @@ import RegisterUser from './pages/registerUser.jsx';
 import CreateProduct from './pages/createProduct.jsx';
 import LoginUser from './pages/loginUser.jsx';
 import ProfilePage from './pages/profilePage.jsx';
-import Search from './pages/search.jsx';
 import Product from './pages/product.jsx';
 
 const router = createBrowserRouter([
@@ -19,7 +18,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/category/:category",
-    element: <Search/>
+    element: <Category/>
   },
   {
     path: "/register-user",
@@ -33,20 +32,10 @@ const router = createBrowserRouter([
     path: "/create-product",
     element: <CreateProduct/>
   },
-  // {
-  //   path: "/product/:title",
-  //   element: <Search/>
-  // },
-  
   {
-    path: "/category/:category",
-    element: <Search/>
+    path: "/search/:title",
+    element: <Category/>
   },
-  // {
-  //   path: "/product/:idUser",
-  //   element: <Search/>
-  // },
-  
   {
     path: "/product/:id",
     element: <Product/>
@@ -63,7 +52,6 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
-    
+    <RouterProvider router={router} />   
   </React.StrictMode>
 )

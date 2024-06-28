@@ -23,7 +23,7 @@ const RegisterUser = () => {
             ...FormUser,
             [name]: value
         });
-        
+
     };
 
     const handleSubmit = async (e) => {
@@ -38,7 +38,6 @@ const RegisterUser = () => {
                 },
                 body: bodyJson
             };
-
 
             const response = await fetch('http://localhost:3000/api/user', options);
             if (response.ok) {

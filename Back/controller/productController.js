@@ -23,8 +23,9 @@ export const productCreate = async (req, res) => {
 
 export const productUpdate = async (req, res) => {
     try {
+        const id = req.params.id
         const { _id, idUser, title, description, interest, type, category, status, photo } = req.body;
-        const product = await productModel.updateOne({ idUser, title, description, interest, type, category, status, photo });
+        const product = await productModel.updateOne({  title : title, description : description, interest:interest, type: type, category: category, status: status , photo : photo });
         res.status(201).json({ product: product._id });
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -105,6 +106,25 @@ export const productFindCategory = async (req, res) => {
 
         res.status(200).json({ product });
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        res.status(500).json({ error: error.message , params: req.params});
+    }
+};
+
+export const productFindCategoryTitle = async (req, res) => {
+    try {
+        const { category } = req.params;
+
+        const product = await productModel.find({
+            category: {
+                $regex: category,
+                $options: "i"
+            },
+            status: 'Ativo'
+        })
+            ;
+
+        res.status(200).json({ product });
+    } catch (error) {
+        res.status(500).json({ error: error.message , params: req.params});
     }
 };
