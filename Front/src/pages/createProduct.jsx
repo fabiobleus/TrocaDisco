@@ -1,14 +1,17 @@
 import Footer from "../componentes/footer"
 import Header from "../componentes/header";
 import "/src/index.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { Buffer } from "buffer";
+import fs from 'fs';
 
 const ProductPage = () => {
   const navigate = useNavigate();
+  const id = useParams();
   const [file, setFile] = useState('');
   const [base64, setBase64] = useState('');
-
+  let photo = []
   const [PhotoProduct, setPhotoProduct] = useState([]); // array para gravação da imagens
   const [FormProduct, setFormProduct] = useState({
     title: '',
@@ -18,35 +21,76 @@ const ProductPage = () => {
     status: 'Ativo',
 
   });
-  const base64Convert = (readerEvt) => {
+  function base64ToFile(base64String, filename) {
+    // Dividir a string base64 para obter o tipo de arquivo e os dados base64
+    if (!base64String || !filename) {
+      return
+    }
+    const [mimePart, dataPart] = base64String.split(',');
+    const mimeType = mimePart.match(/:(.*?);/)[1];
 
-    let binaryString = readerEvt.target.result;
-    console.log('asdasdasd: ', readerEvt.result)
-    setBase64(btoa(binaryString))
+    // Decodificar a string base64
+    const byteCharacters = atob(dataPart);
+    const byteNumbers = new Array(byteCharacters.length);
+    for (let i = 0; i < byteCharacters.length; i++) {
+      byteNumbers[i] = byteCharacters.charCodeAt(i);
+    }
+    const byteArray = new Uint8Array(byteNumbers);
 
+    // Criar um Blob a partir dos dados decodificados
+    const blob = new Blob([byteArray], { type: mimeType });
+
+
+    // Criar um objeto URL para o Blob
+    const url = URL.createObjectURL(blob);
+    return url
+    // Criar um link para download
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+
+    // Remover o link após o download
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
   }
-  const base64Desconvert = (file) => {
-    // let base64 = new File(readerEvt, atob(file), { type: 'image/png' })
-    //  const base64 =
-    return atob(file);
-  }
+
+
+  const base64Convert = (file, callback) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => callback(reader.result);
+  };
 
   const photoUpload = (e) => {
     e.preventDefault();
     const reader = new FileReader();
     const file = e.target.files[0];
-
-    reader.onload = () => {
-      setFile(reader.result);
-      const file64 = btoa(file);
-      setBase64(file64);
-      //  base64Convert(e)
-
-    };
+    setFile(file.name)
     // reader.readAsDataURL(file);
+    if (reader !== undefined && file !== undefined) {
 
-    console.log(base64);
-    console.log(file64);
+      base64Convert(file, (result) => {
+        setBase64();
+        if (PhotoProduct.length !== 0) {
+          PhotoProduct.map((PhotoProduct) => {
+            photo.push({ name: PhotoProduct.name, base64: PhotoProduct.base64 });
+          })
+        }
+        photo.push({ name: file.name, base64: result })
+        setPhotoProduct(photo);
+        
+        setFormProduct({
+          ...FormProduct,
+          // photo: PhotoProduct
+          photo: photo
+        });
+        
+
+      })
+
+    }
   };
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -54,19 +98,20 @@ const ProductPage = () => {
       ...FormProduct,
       [name]: value
     });
-    setPhotoProduct(e.target.files[0])
+    // setPhotoProduct(e.target.files[0])
   };
 
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
-      console.log(PhotoProduct)
+      console.log({ FormProduct })
       const bodyJson = JSON.stringify(FormProduct);
       const options = {
         method: 'POST',
         headers: {
           'Content-Type': 'application/JSON',
           auth: localStorage.getItem('tokenTD')
+
         },
         body: bodyJson
       };
@@ -74,7 +119,7 @@ const ProductPage = () => {
       // uplo
       const response = await fetch('http://localhost:3000/api/product', options);
       if (response.ok) {
-        alert('produt');
+        alert('Produto Cadastrado com sucesso!!');
 
       } else {
         const err = await response.json();
@@ -88,6 +133,9 @@ const ProductPage = () => {
   useEffect(() => {
     if (!localStorage.getItem('tokenTD')) {
       navigate('/login-user')
+    }
+    if (id.id !== undefined){
+      
     }
 
   });
@@ -127,7 +175,15 @@ const ProductPage = () => {
         <div className="mb-3">
           <label htmlFor="inputProductPhoto" className="form-label">Foto do Produto:</label>
           <input type="file" className="form-control" onChange={photoUpload} id="inputProductPhoto" />
-          <img src={base64Desconvert(base64)} width={200} height={200} alt="" />
+
+          {/* {PhotoProduct.length > 0 && PhotoProduct.map((item) => (
+            <img src={base64ToFile(item.base64, item.name)} width={200} height={200} alt="" />
+          ))} */}
+          <div>
+            {PhotoProduct.length > 0 && PhotoProduct.map((item) => (
+              <img src={base64ToFile(item.base64, item.name)} width={200} height={200} alt="" />
+            ))}
+          </div>
         </div>
         <div className="d-grid">
           <button type="submit" className="btn btn-primary">Cadastrar Anúncio</button>

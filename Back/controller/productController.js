@@ -17,7 +17,7 @@ export const productCreate = async (req, res) => {
         const product = await productModel.create(  { idUser: idUserT.idUser,title, description, interest, type, category, status, photo });
         res.status(200).json({ productInsert: product._id });
     } catch (error) {
-        res.status(500).json({ error: error.message , idUserT: idUserT.idUser});
+        res.status(500).json({ error: error.message });
     }
 };
 
@@ -82,13 +82,13 @@ export const productFindName = async (req, res) => {
 
 
 export const productFindUser = async (req, res) => {
+    const idUserT = jwt.decode(req.headers.auth, process.env.HASHTOKEN)
     try {
-        const { idUser } = req.params;
-
-        const product = await productModel.findOne(iduser.idUser, idUser);
+        // const { idUser } = req.params;
+        const product = await productModel.findOne({idUser :idUserT.idUser});
         res.status(200).json({ product: product });
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        res.status(500).json({  idUserT : idUserT.idUser});
     }
 };
 export const productFindCategory = async (req, res) => {

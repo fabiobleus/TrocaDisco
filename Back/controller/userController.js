@@ -23,9 +23,11 @@ export const alterUser = async (req, res) => {
 
 export const getUser = async (req, res) => {
     try {
-        const { email } = req.params;
-        const user = await userModel.findOne({ email: email });
-        res.status(200).json({ user: user });
+        // const { id } = req.body.auth;
+        const idUserT = jwt.decode(req.headers.auth, process.env.HASHTOKEN)
+
+        const user = await userModel.findOne({ _id: idUserT.idUser });
+        res.status(200).json({ user: user, id: idUserT.idUser });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
