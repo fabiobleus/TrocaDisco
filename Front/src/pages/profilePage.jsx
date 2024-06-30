@@ -164,7 +164,7 @@ const ProfilePage = () => {
           </div>
           <div className="col-md-3">
             <h3>Seus Anúncios</h3>
-            {loading ? (
+            {/* {loading ? (
               <p>Carregando anúncios...</p>
             ) : (
               <ul className="list-group">
@@ -175,7 +175,7 @@ const ProfilePage = () => {
                   </li>
                 ))}
               </ul>
-            )}
+            )}  */}
           </div>
         </div>
       </div>

@@ -3,7 +3,7 @@ import Header from "../componentes/header";
 import "/src/index.css";
 import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { Buffer } from "buffer";
+// import { Buffer } from "buffer";
 import fs from 'fs';
 
 const ProductPage = () => {
