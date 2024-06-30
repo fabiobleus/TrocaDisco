@@ -162,7 +162,7 @@ const ProfilePage = () => {
               </div>
             </form>
           </div>
-          <div className="col-md-3">
+          {/* <div className="col-md-3">
             <h3>Seus Anúncios</h3>
             {loading ? (
               <p>Carregando anúncios...</p>
@@ -176,7 +176,7 @@ const ProfilePage = () => {
                 ))}
               </ul>
             )}
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

@@ -1,10 +1,10 @@
 import Footer from "../componentes/footer"
 import Header from "../componentes/header";
-import "/src/index.css";
+import "../css/createProduct.css";
+
 import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { Buffer } from "buffer";
-import fs from 'fs';
+
 
 const ProductPage = () => {
   const navigate = useNavigate();
@@ -92,16 +92,31 @@ const ProductPage = () => {
 
     }
   };
+
+  const photoDelete = (index) => {
+    if (PhotoProduct.length !== 0) {
+      PhotoProduct.map((PhotoProduct,indexDelete) => {
+        if (index !== indexDelete) {
+          photo.push({ name: PhotoProduct.name, base64: PhotoProduct.base64 });
+        }       
+      })
+    }
+     setPhotoProduct(photo);
+     setFormProduct({
+      ...FormProduct,
+      photo: photo
+    });
+  };
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormProduct({
       ...FormProduct,
       [name]: value
     });
-    // setPhotoProduct(e.target.files[0])
+
   };
 
-  const handleSubmit = async (e) => {
+  const handleCreate = async (e) => {
     try {
       e.preventDefault();
       console.log({ FormProduct })
@@ -129,22 +144,61 @@ const ProductPage = () => {
       alert('Erro! tente novamente.');
     }
   };
+  const handleUpdate = async (e) => {
+    try {
+      e.preventDefault();
+
+      const bodyJson = JSON.stringify(FormProduct);
+      const options = {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/JSON',
+          auth: localStorage.getItem('tokenTD')
+        },
+        body: bodyJson
+      };
+      const urlApi = 'http://localhost:3000/api/product/' + id.id;
+
+      const response = await fetch(urlApi, options);
+      if (response.ok) {
+        alert('Produto Atualizado com sucesso!!');
+
+      } else {
+        const err = await response.json();
+        console.log(FormProduct);
+      }
+    } catch (error) {
+      alert('Erro! tente novamente.');
+    }
+  };
 
   useEffect(() => {
     if (!localStorage.getItem('tokenTD')) {
       navigate('/login-user')
     }
     if (id.id !== undefined){
-      
+      fetch('http://localhost:3000/api/product/' + id.id)
+      .then(async (response) => {
+        const ret = await response.json();
+        const sol = ret.product;
+       const photo = ret.product.photo;
+        setFormProduct(sol);
+        setPhotoProduct(photo);
+
+      }
+      )
+      .catch((err) => {
+        // console.log(err);
+      })
     }
 
-  });
+  },[]);
   return (
     <div className="min-height-500 d-flex flex-column align-items-center justify-content-center" style={{ minHeight: '100vh' }}>
       <Header />
       <div style={{ height: '2rem' }}></div>
       <h1>Cadastre o seu Anúncio</h1>
-      <form className="form-container" onSubmit={handleSubmit} style={{ maxWidth: '600px', width: '100%' }}>
+      <form className="form-container" style={{ maxWidth: '600px', width: '100%' }}>
         <div className="mb-3">
           <label htmlFor="inputProductName" className="form-label">Título do Anúncio:</label>
           <input type="text" className="form-control" name="title" id="inputProductName" onChange={handleChange} value={FormProduct.title} />
@@ -166,7 +220,7 @@ const ProductPage = () => {
         </div>
         <div className="mb-3">
           <label htmlFor="inputProductStatus" className="form-label">Status do Anúncio:</label>
-          <select id="inputProductStatus" onChange={handleChange} value={FormProduct.status} name="status" className="form-select">
+          <select id="inputProductStatus" value={FormProduct.status} onChange={handleChange} name="status" className="form-select">
             <option value="Ativo">Ativo</option>
             <option value="Suspenso">Suspenso</option>
             <option value="Finalizado">Finalizado</option>
@@ -179,14 +233,21 @@ const ProductPage = () => {
           {/* {PhotoProduct.length > 0 && PhotoProduct.map((item) => (
             <img src={base64ToFile(item.base64, item.name)} width={200} height={200} alt="" />
           ))} */}
-          <div>
-            {PhotoProduct.length > 0 && PhotoProduct.map((item) => (
-              <img src={base64ToFile(item.base64, item.name)} width={200} height={200} alt="" />
+          <div className="photos">
+            {PhotoProduct.length > 0 && PhotoProduct.map((item,index) => ( <div className="photoProductCreate">
+              <img src={base64ToFile(item.base64, item.name)} width={148} height={148} alt={item.name} />
+             
+              <button type="button"><img key={index} src="\src\assets\trash.svg" width={20} height={20} alt="" onClick={() => {photoDelete(index)}} /></button>
+              </div>
             ))}
           </div>
         </div>
         <div className="d-grid">
-          <button type="submit" className="btn btn-primary">Cadastrar Anúncio</button>
+          {!id.id ?  // if ternario para saber se esta editando ou criando
+          <button type="submit" className="btn btn-primary"  onClick={handleCreate}  >Cadastrar Anúncio</button> 
+          :
+          <button type="submit" className="btn btn-primary" onClick={handleUpdate} >Atualizar Anúncio</button>}
+         
         </div>
       </form>
     </div>
