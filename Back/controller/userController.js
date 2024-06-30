@@ -15,7 +15,7 @@ export const alterUser = async (req, res) => {
     try {
         const { _id, name, email, phone, password, cpf, birthdate, address, cep, city, uf } = req.body;
         const userAlter = await userModel.updateOne({ name, email, phone, password, cpf, birthdate, address, cep, city, uf });
-        res.status(201).json({ userAlter: userAlter._id });
+        res.status(201).json({ userAlter: userAlter });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
@@ -30,7 +30,7 @@ export const getUser = async (req, res) => {
         res.status(200).json({ user: user, id: idUserT.idUser });
     } catch (error) {
         res.status(500).json({ error: error.message });
-    }
+    }''
 };
 
 export const loginUser = async (req, res) => {
@@ -48,7 +48,7 @@ export const loginUser = async (req, res) => {
             return res.status(404).json({ message: "User or password invalid 88" });
 
         };
-        const token = jwt.sign({ idUser : userLogin._id}, process.env.HASHTOKEN, {expiresIn: '1h'})
+        const token = jwt.sign({ idUser : userLogin._id}, process.env.HASHTOKEN, {expiresIn: '48h'})
         
         return res.status(200).json({token});
 
