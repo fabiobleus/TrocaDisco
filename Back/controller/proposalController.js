@@ -2,9 +2,9 @@ import proposalModel from "../model/proposalModel.js";
 
 export const createProposal = async (req, res) => {
     try {
-        const { idProduct, idProductUser, idUserProposal, idProductProposal, description, dateProposal } = req.body;
+        const { idProduct, idProductUser, idUserProposal, idProductProposal, description, dateProposal , conversation} = req.body;
         const proposalCreate = await proposalModel.create({
-            idProduct, idProductUser, idUserProposal, idProductProposal, description, dateProposal
+            idProduct, idProductUser, idUserProposal, idProductProposal, description, dateProposal, conversation
         }
 
         );

@@ -6,15 +6,15 @@ import jwt from 'jsonwebtoken';
 
 export const productCreate = async (req, res) => {
     // const usid = ;
-        const idUserT = jwt.decode(req.headers.auth, process.env.HASHTOKEN)
+    const idUserT = jwt.decode(req.headers.auth, process.env.HASHTOKEN)
 
     try {
-         const { title, description, interest, type, category, status, photo } = req.body;
+        const { title, description, interest, type, category, status, photo } = req.body;
         //const bodyJson = req.body;
 
         // const usid = req.header.auth;
         // const idUserT = jwt.decode(usid, process.env.HASHTOKEN)
-        const product = await productModel.create(  { idUser: idUserT.idUser,title, description, interest, type, category, status, photo });
+        const product = await productModel.create({ idUser: idUserT.idUser, title, description, interest, type, category, status, photo });
         res.status(200).json({ productInsert: product._id });
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -27,7 +27,7 @@ export const productUpdate = async (req, res) => {
         const { _id, idUser, title, description, interest, type, category, status, photo } = req.body;
         // const product = await productModel.updateOne({ _id: _id} , {$set : {  title : title, description : description, interest:interest, type: type, category: category, status: status , photo : photo }});
         // const product = await productModel.updateOne({ _id: _id} , {$set : {  title : title, description : description, interest:interest, type: type, category: category, status: status , photo : photo }});
-        const product = await productModel.updateOne({title, description, interest, type, category, status, photo });
+        const product = await productModel.updateOne({ title, description, interest, type, category, status, photo });
         res.status(201).json({ product: product._id });
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -46,7 +46,7 @@ export const productDelete = async (req, res) => {
 
 export const productGetAll = async (req, res) => {
     try {
-        const product = await productModel.find({status: 'Ativo'});
+        const product = await productModel.find({ status: 'Ativo' });
         res.status(200).json({ product });
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -56,12 +56,24 @@ export const productGetAll = async (req, res) => {
 export const productGet = async (req, res) => {
     try {
         const { id } = req.params;
+        let proposal = {};
         const product = await productModel.findOne({ _id: id });
-        const proposal = await proposalModel.findOne({idProduct : id})
         const idSellerUser = product.idUser
-        const seller  = await userModel.findOne({ _id: idSellerUser });
+        const seller = await userModel.findOne({ _id: idSellerUser });
+        let returnJson = {product, seller};
 
-        res.status(200).json({ product , proposal, seller});
+        if (req.body.tktd) {
+            const { tktd } = req.body;
+            const idUserT = jwt.decode(tktd, process.env.HASHTOKEN);
+            
+            if (idUserT !== idSellerUser) {
+                proposal = await proposalModel.findOne({ idProduct: id, idUserProposal: idUserT.idUser });
+                returnJson = {product, seller,proposal};
+            }
+        };
+
+
+        res.status(200).json(returnJson);
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
@@ -87,10 +99,10 @@ export const productFindUser = async (req, res) => {
     const idUserT = jwt.decode(req.headers.auth, process.env.HASHTOKEN)
     try {
         // const { idUser } = req.params;
-        const product = await productModel.findOne({idUser :idUserT.idUser});
+        const product = await productModel.findOne({ idUser: idUserT.idUser });
         res.status(200).json({ product: product });
     } catch (error) {
-        res.status(500).json({  idUserT : idUserT.idUser});
+        res.status(500).json({ idUserT: idUserT.idUser });
     }
 };
 export const productFindCategory = async (req, res) => {
@@ -108,7 +120,7 @@ export const productFindCategory = async (req, res) => {
 
         res.status(200).json({ product });
     } catch (error) {
-        res.status(500).json({ error: error.message , params: req.params});
+        res.status(500).json({ error: error.message, params: req.params });
     }
 };
 
@@ -127,6 +139,6 @@ export const productFindCategoryTitle = async (req, res) => {
 
         res.status(200).json({ product });
     } catch (error) {
-        res.status(500).json({ error: error.message , params: req.params});
+        res.status(500).json({ error: error.message, params: req.params });
     }
 };

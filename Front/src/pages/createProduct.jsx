@@ -1,7 +1,6 @@
 import Footer from "../componentes/footer"
 import Header from "../componentes/header";
 import "../css/createProduct.css";
-
 import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 
@@ -11,6 +10,7 @@ const ProductPage = () => {
   const id = useParams();
   const [file, setFile] = useState('');
   const [base64, setBase64] = useState('');
+  const params = useParams();
   let photo = []
   const [PhotoProduct, setPhotoProduct] = useState([]); // array para gravação da imagens
   const [FormProduct, setFormProduct] = useState({
@@ -134,8 +134,9 @@ const ProductPage = () => {
       // uplo
       const response = await fetch('http://localhost:3000/api/product', options);
       if (response.ok) {
+        const data = await response.json();
         alert('Produto Cadastrado com sucesso!!');
-
+         navigate(`/product/${data.productInsert}`);	
       } else {
         const err = await response.json();
         console.log(FormProduct);
@@ -162,7 +163,8 @@ const ProductPage = () => {
       const response = await fetch(urlApi, options);
       if (response.ok) {
         alert('Produto Atualizado com sucesso!!');
-
+       
+        navigate(`/product/${id.id}`); 	
       } else {
         const err = await response.json();
         console.log(FormProduct);
@@ -177,7 +179,20 @@ const ProductPage = () => {
       navigate('/login-user')
     }
     if (id.id !== undefined){
-      fetch('http://localhost:3000/api/product/' + id.id)
+      const FormJson = { tktd: localStorage.getItem('tokenTD') };
+        const bodyJson = JSON.stringify(FormJson);
+
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/JSON',
+                auth: localStorage.getItem('tokenTD')
+
+            },
+            body: bodyJson
+        };
+        fetch(`http://localhost:3000/api/product/${params.id}`, options)
+      // fetch('http://localhost:3000/api/product/' + id.id)
       .then(async (response) => {
         const ret = await response.json();
         const sol = ret.product;
@@ -237,7 +252,7 @@ const ProductPage = () => {
             {PhotoProduct.length > 0 && PhotoProduct.map((item,index) => ( <div className="photoProductCreate">
               <img src={base64ToFile(item.base64, item.name)} width={148} height={148} alt={item.name} />
              
-              <button type="button"><img key={index} src="\src\assets\trash.svg" width={20} height={20} alt="" onClick={() => {photoDelete(index)}} /></button>
+              <img className="buttonDelete" key={index} src="\src\assets\trash.svg" width={20} height={20} alt="" onClick={() => {photoDelete(index)}} />
               </div>
             ))}
           </div>
