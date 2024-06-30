@@ -2,6 +2,7 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 import Footer from './componentes/footer';
 import './App.css';
+import MagicSquare from './css/componentsResponsive';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Outlet />
       {/* Rodapé */}
       <Footer />
+      <MagicSquare squareSize={{md:200, sm:100, xs:50}}/>
     </div>
   );
 }
