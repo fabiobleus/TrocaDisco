@@ -5,7 +5,8 @@ import { useEffect, useState } from "react";
 
 const ProfilePage = () => {
  
-
+  auth: localStorage.getItem('tokenTD')
+  
   const [userData, setUserData] = useState({
     name: '',
     email: '',
