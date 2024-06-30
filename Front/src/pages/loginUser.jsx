@@ -75,12 +75,16 @@ const LoginUser = () => {
             <form className="form-container" style={{ maxWidth: '400px', width: '100%' }} onSubmit={handleSubmit}>
                 <div className="mb-3">
                     <label htmlFor="staticEmail2" className="form-label">Email:</label>
-                    <input type="email" className="form-control" id="staticEmail2" placeholder="email@example.com" onChange={handleChange} value={FormLogin.email} name="email" />
+                    <input type="email" className="form-control" id="staticEmail2" placeholder="email@example.com" onChange={handleChange} value={FormLogin.email} name="email" style={{ textAlign: 'left', paddingLeft: '10px' }}/>
                 </div>
 
                 <div className="mb-3">
                     <label htmlFor="inputPassword2" className="form-label">Senha:</label>
-                    <input type="password" className="form-control" id="inputPassword2" placeholder="Password" onChange={handleChange} value={FormLogin.password} name="password" />
+                    <input type="password" className="form-control" id="inputPassword2" placeholder="Password" onChange={handleChange} value={FormLogin.password} name="password" style={{ textAlign: 'left', paddingLeft: '10px' }}/>
+                </div>
+
+                <div>
+                    <p>Esqueceu a senha? <a href="/forgot-password">Clique aqui</a></p>
                 </div>
 
                 <div className="d-grid">
