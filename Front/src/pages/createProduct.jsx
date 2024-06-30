@@ -4,12 +4,6 @@ import "../css/createProduct.css";
 
 import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-<<<<<<< HEAD
-// import { Buffer } from "buffer";
-import fs from 'fs';
-=======
-
->>>>>>> f5a75af73dd4def0a96dbeae9ecbe45e761ecaa1
 
 const ProductPage = () => {
   const navigate = useNavigate();

@@ -175,13 +175,8 @@ const ProfilePage = () => {
                   </li>
                 ))}
               </ul>
-<<<<<<< HEAD
-            )}  */}
-          </div>
-=======
             )}
           </div> */}
->>>>>>> f5a75af73dd4def0a96dbeae9ecbe45e761ecaa1
         </div>
       </div>
     </div>
