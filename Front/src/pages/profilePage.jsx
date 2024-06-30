@@ -162,21 +162,21 @@ const ProfilePage = () => {
               </div>
             </form>
           </div>
-          <div className="col-md-3">
+          {/* <div className="col-md-3">
             <h3>Seus Anúncios</h3>
             {/* {loading ? (
               <p>Carregando anúncios...</p>
             ) : (
-              // <ul className="list-group">
-              //   {anuncios.map((ad) => (
-              //     <li key={ad.id} className="list-group-item">
-              //       <h5>{ad.name}</h5>
-              //       <p>{ad.description}</p>
-              //     </li>
-              //   ))}
-              // </ul>
-            )} */}
-          </div>
+              <ul className="list-group">
+                {anuncios.map((ad) => (
+                  <li key={ad.id} className="list-group-item">
+                    <h5>{ad.name}</h5>
+                    <p>{ad.description}</p>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div> */}
         </div>
       </div>
       <Footer />
