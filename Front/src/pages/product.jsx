@@ -113,7 +113,7 @@ const Product = () => {
                             <button className="btn btn-success w-100 ms-0">Enviar Proposta</button>
                         </div>
                         <div className="proposals" id="proposals">
-                            <h1 className="h4">Propostas</h1>
+                            <h1 className="h4 ms-5">Propostas</h1>
                             {/* Conteúdo das propostas */}
                         </div>
                     </div>
