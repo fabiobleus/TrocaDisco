@@ -8,8 +8,10 @@ import Category from './pages/category.jsx';
 import RegisterUser from './pages/registerUser.jsx';
 import CreateProduct from './pages/createProduct.jsx';
 import LoginUser from './pages/loginUser.jsx';
+import ForgotPassword from './componentes/forgotPassword.jsx';
 import ProfilePage from './pages/profilePage.jsx';
 import Product from './pages/product.jsx';
+
 
 const router = createBrowserRouter([
   {
@@ -27,6 +29,10 @@ const router = createBrowserRouter([
   {
     path: "/login-user",
     element: <LoginUser/>
+  },
+  {
+    path: "/forgot-password",
+    element: <ForgotPassword/>
   },
   {
     path: "/create-product",

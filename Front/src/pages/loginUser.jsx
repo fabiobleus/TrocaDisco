@@ -2,7 +2,8 @@ import Header from "../componentes/header"
 import Footer from "../componentes/footer"
 import "/src/index.css"
 import React, { useState } from 'react';
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
 
 const LoginUser = () => {
     const navigate = useNavigate();
@@ -84,7 +85,7 @@ const LoginUser = () => {
                 </div>
 
                 <div>
-                    <p>Esqueceu a senha? <a href="/forgot-password">Clique aqui</a></p>
+                    <p>Esqueceu a senha? <Link to="/forgot-password">Clique aqui</Link></p>
                 </div>
 
                 <div className="d-grid">
