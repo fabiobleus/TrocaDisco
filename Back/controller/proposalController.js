@@ -1,6 +1,5 @@
 import proposalModel from "../model/proposalModel.js";
 
-
 export const createProposal = async (req, res) => {
     try {
         const { idProduct, idProductUser, idUserProposal, idProductProposal, description, dateProposal , conversation} = req.body;

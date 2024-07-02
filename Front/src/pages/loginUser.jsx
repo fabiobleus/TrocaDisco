@@ -75,7 +75,7 @@ const LoginUser = () => {
             <form className="form-container" style={{ maxWidth: '400px', width: '100%' }} onSubmit={handleSubmit}>
                 <div className="mb-3">
                     <label htmlFor="staticEmail2" className="form-label">Email:</label>
-                    <input type="email" className="form-control" id="staticEmail2" placeholder="email@example.com" onChange={handleChange} value={FormLogin.email} name="email" />
+                    <input type="email" className="form-control" id="staticEmail2" placeholder="email@example.com" onChange={handleChange} value={FormLogin.email} name="email" style={{ textAlign: 'left', paddingLeft: '10px' }}/>
                 </div>
 
                 <div className="mb-3">

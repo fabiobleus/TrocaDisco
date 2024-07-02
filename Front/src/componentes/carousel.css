@@ -3,8 +3,8 @@
 
 .carousel {
 
-    width: 1720px;
-    height: 900px;
+    width: 1250px;
+    height: 620px;
     overflow: hidden;
     position: relative;
     margin-bottom: 50px;
@@ -30,4 +30,9 @@
     height: 100%;
     object-fit: cover;
     transition: none; /* Desabilita qualquer transição que possa estar aumentando a imagem */
+}
+
+.carousel-control-prev, .carousel-control-next {
+    width: 50px;
+    height: 650px;
 }

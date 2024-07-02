@@ -1,7 +1,7 @@
 import './header.css';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import  logotipo  from '/src/assets/logotipo.png'
+import  logo from "../assets/logotipo.png";
 const Header = () => {
 
   const navigate = useNavigate();
@@ -39,7 +39,7 @@ const Header = () => {
        
         <div className="container bg-primary">
           <Link className="navbar-brand" href="#">
-            <img src={logotipo} width="172" height="172" alt="logo" />
+            <img src={logo} width="172" height="172" alt="logo" />
           </Link>
 
           <form className="form-inline ml-auto" onSubmit={onSubmitValue} >
