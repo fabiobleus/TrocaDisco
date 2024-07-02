@@ -1,5 +1,6 @@
 import proposalModel from "../model/proposalModel.js";
 
+
 export const createProposal = async (req, res) => {
     try {
         const { idProduct, idProductUser, idUserProposal, idProductProposal, description, dateProposal , conversation} = req.body;
@@ -35,8 +36,10 @@ export const deleteProposal = async (req, res) => {
 };
 
 export const getAllProposal = async (req, res) => {
+   
+    const { id } = req.params;
     try {
-        const allProposal = await proposalModel.find();
+        const allProposal = await proposalModel.findOne({_id: id});
         res.status(200).json({ allProposal });
     } catch (error) {
         res.status(500).json({ error: error.message });
