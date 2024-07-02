@@ -1,11 +1,40 @@
-.proposals{
+.proposals {
     border: 1px solid black;
 
-};
-.seller{
-    background-color: sandybrown;
 }
-.buyer{
 
+;
+
+.seller {
+    border: 1px solid rgb(6, 228, 32);
+    border-radius: 15px;
+    padding: 3px;
+    margin: 0;
+    background-color: rgb(6, 228, 32);
+
+}
+
+
+.seller p {
+    width: max-content;
+    text-align: left;
+    border: 1px solid rgb(12, 88, 239);
+    border-radius: 15px;
+    padding: 3px 10px;
+    background-color: rgb(6, 228, 32);
+    /* margin-left: auto; */
+}
+.buyer {
     text-align: right;
+}
+
+.buyer p {
+    width: max-content;
+    color:white;
+    text-align: right;
+    border: 1px solid rgb(12, 88, 239);
+    border-radius: 15px;
+    padding: 3px 10px;
+    background-color: rgb(27, 77, 226);
+    margin-left: auto;
 }

@@ -33,6 +33,7 @@ function Product() {
     };
     function base64ToFile(base64String, filename) {
         // Dividir a string base64 para obter o tipo de arquivo e os dados base64
+        console.log(base64String, filename)
         if (!base64String || !filename) {
             return
         }
@@ -138,6 +139,7 @@ function Product() {
                 setUseProduct(product);
                 setUseSeller(seller);
                 setUseProposal(proposal);
+                console.log(photoA)
             }
             )
             .catch((err) => {
@@ -170,7 +172,7 @@ function Product() {
                             <h2 className="h5">Localização:</h2>
                             <h3 className="h6">{useSeller.cep} / {useSeller.city} / {useSeller.uf}</h3>
                         </div>
-                        ;
+
                         {/* <Chat id={useP} /> */}
                         {!useProposal && useMakeProposal == false && (
                             <div className="mb-4 text-center">
@@ -192,14 +194,17 @@ function Product() {
                                 <div >
                                     <h1>Proposta</h1>
                                     <div className="proposals" id="proposals">
-                                        {useConversation.map((proposal) => (
-
-                                            <p className={proposal.user}>{proposal.message}</p>
+                                        {useConversation.map((proposal, index) => (
+                                            <>
+                                                <div key={index} className={proposal.user}>
+                                                    <p>{proposal.message}</p>
+                                                </div>
+                                            </>
                                         ))
                                         }
 
-                                    </div>
-                                    <label htmlFor="proposalInput2" className="form-label">Caso tenha o produto anunciado, insira o link</label>
+                                    </div >
+                                    <label htmlFor="proposalInput2" className="form-label">Mande uma mensagem</label>
                                     <input type="text" className="form-control mb-3" id="proposalInput2" placeholder="Insira a mensagem!" onChange={changeMensage} value={useMensage} />
                                     <button className="btn btn-success w-100 ms-0" onClick={handleSendMensage}>Enviar Mensagem</button>
                                 </div>
