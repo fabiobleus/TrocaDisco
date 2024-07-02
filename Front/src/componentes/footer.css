@@ -4,14 +4,15 @@ body {
   
 .colorName {
   color: rgb(98, 98, 99);
-  padding-left: 200px;
+  padding-left: 0px;
   font-size: 1.2rem;
   margin-top: 100px;
+  
 }
 
 .colorParagrafo {
   color: rgb(98, 98, 99);
-  padding-left: 200px;
+  padding-left: 0px;
   font-size: 1.2rem;
 }
 
@@ -37,4 +38,10 @@ body {
   font-size: 1.1rem;
 
  
+}
+
+@media screen and (max-width: 800px) {
+  footer {
+    text-align: center;
+  }
 }

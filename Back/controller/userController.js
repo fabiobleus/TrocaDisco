@@ -30,17 +30,17 @@ export const getUser = async (req, res) => {
         res.status(200).json({ user: user, id: idUserT.idUser });
     } catch (error) {
         res.status(500).json({ error: error.message });
-    }
+    } ''
 };
 
 export const loginUser = async (req, res) => {
-  try {
+    try {
         const { email, password } = req.body;
         if (!email || !password) {
             return response.status(400).json({ message: "Invalid request body" });
         }
 
-        const userLogin = await userModel.findOne({ email : email, password : password });
+        const userLogin = await userModel.findOne({ email: email, password: password });
         if (!userLogin) {
             return res.status(404).json({ message: "User or password invalid" });
         }
@@ -48,12 +48,40 @@ export const loginUser = async (req, res) => {
             return res.status(404).json({ message: "User or password invalid 88" });
 
         };
-        const token = jwt.sign({ idUser : userLogin._id}, process.env.HASHTOKEN, {expiresIn: '48h'})
-        
-        return res.status(200).json({token});
+        const token = jwt.sign({ idUser: userLogin._id }, process.env.HASHTOKEN, { expiresIn: '48h' })
+
+        return res.status(200).json({ token });
 
     }
     catch (error) {
         res.status(500).json({ error: error.message });
     }
 };
+
+export const verifyEmail = async (req, res) => {
+    const { email } = req.body;
+    const user = await userModel.findOne({email:email});
+
+    if (user) {
+        res.status(200).json({ message: 'Email verificado' });
+    } else {
+        res.status(400).json({ message: 'Email não encontrado' });
+    }
+};
+
+
+
+export const resetPassword = async (req, res) => {
+    const { email, password } = req.body;
+    const userIndex = await userModel.updateOne({email:email},{password:password});
+
+    if (userIndex) {
+        
+        res.status(200).json({ message: 'Senha redefinida com sucesso' });
+    } else {
+        res.status(400).json({ message: 'Erro ao redefinir senha' });
+    }
+};
+
+
+

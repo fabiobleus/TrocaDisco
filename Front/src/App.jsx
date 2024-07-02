@@ -2,6 +2,8 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 import Footer from './componentes/footer';
 import './App.css';
+import MagicSquare from './css/componentsResponsive';
+import ForgotPassword from './componentes/forgotPassword';
 
 function App() {
   return (
@@ -10,7 +12,9 @@ function App() {
       <h1>Bem-vindo ao Troca Disco</h1>
       <Outlet />
       {/* Rodapé */}
+      
       <Footer />
+      <MagicSquare squareSize={{md:200, sm:100, xs:50}}/>
     </div>
   );
 }

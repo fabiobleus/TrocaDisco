@@ -1,6 +1,7 @@
 import { json, redirect, useNavigate } from "react-router-dom";
 import Header from "../componentes/header"
 import React, { useState } from 'react';
+import "/src/index.css"
 
 
 const RegisterUser = () => {
@@ -61,27 +62,27 @@ const RegisterUser = () => {
             <form className="form-container" style={{ maxWidth: '600px', width: '100%' }} onSubmit={handleSubmit}>
                 <div className="mb-3">
                     <label htmlFor="inputName" className="form-label">Nome:</label>
-                    <input type="text" className="form-control" onChange={handleChange} value={FormUser.name} name="name" />
+                    <input type="text" className="form-control" onChange={handleChange} value={FormUser.name} name="name" style={{ textAlign: 'left', paddingLeft: '10px' }}/>
                 </div>
                 <div className="mb-3">
                     <label htmlFor="inputEmail4" className="form-label" >E-mail</label>
-                    <input type="email" className="form-control" id="inputEmail4" onChange={handleChange} value={FormUser.email} name="email" />
+                    <input type="email" className="form-control" id="inputEmail4" onChange={handleChange} value={FormUser.email} name="email" style={{ textAlign: 'left', paddingLeft: '10px' }}/>
                 </div>
                 <div className="mb-3" style={{ maxWidth: '300px' }}>
                     <label htmlFor="inputPassword4" className="form-label">Senha</label>
-                    <input type="password" className="form-control" id="inputPassword4" onChange={handleChange} value={FormUser.password} name="password" />
+                    <input type="password" className="form-control" id="inputPassword4" onChange={handleChange} value={FormUser.password} name="password" style={{ textAlign: 'left', paddingLeft: '10px' }}/>
                 </div>
                 <div className="mb-3">
                     <label htmlFor="inputAddress" className="form-label">Endereço</label>
-                    <input type="text" className="form-control" id="inputAddress" onChange={handleChange} value={FormUser.address} name="address" />
+                    <input type="text" className="form-control" id="inputAddress" onChange={handleChange} value={FormUser.address} name="address" style={{ textAlign: 'left', paddingLeft: '10px' }} />
                 </div>
                 <div className="mb-3">
                     <label htmlFor="inputAddress2" className="form-label">Complemento</label>
-                    <input type="text" className="form-control" id="inputAddress2" onChange={handleChange} value={FormUser.complement} name="complement" />
+                    <input type="text" className="form-control" id="inputAddress2" onChange={handleChange} value={FormUser.complement} name="complement" style={{ textAlign: 'left', paddingLeft: '10px' }}/>
                 </div>
                 <div className="mb-3">
                     <label htmlFor="inputCity" className="form-label">Cidade</label>
-                    <input type="text" className="form-control" id="inputCity" onChange={handleChange} value={FormUser.city} name="city" />
+                    <input type="text" className="form-control" id="inputCity" onChange={handleChange} value={FormUser.city} name="city" style={{ textAlign: 'left', paddingLeft: '10px' }}/>
                 </div>
                 <div className="mb-3">
                     <label htmlFor="inputState" className="form-label">Estado</label>
@@ -118,7 +119,7 @@ const RegisterUser = () => {
                 </div>
                 <div className="mb-3" style={{ maxWidth: '150px' }}>
                     <label htmlFor="inputZip" className="form-label">Cep</label>
-                    <input type="text" className="form-control" id="inputZip" />
+                    <input type="text" className="form-control" id="inputZip" style={{ textAlign: 'left', paddingLeft: '10px' }}/>
                 </div>
                 <div className="d-grid" style={{ maxWidth: '150px', margin: '0 auto' }}>
                     <button type="submit" className="btn btn-primary">Cadastrar</button>

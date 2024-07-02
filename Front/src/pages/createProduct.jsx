@@ -4,7 +4,6 @@ import "../css/createProduct.css";
 import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 
-
 const ProductPage = () => {
   const navigate = useNavigate();
   const id = useParams();
@@ -216,11 +215,11 @@ const ProductPage = () => {
       <form className="form-container" style={{ maxWidth: '600px', width: '100%' }}>
         <div className="mb-3">
           <label htmlFor="inputProductName" className="form-label">Título do Anúncio:</label>
-          <input type="text" className="form-control" name="title" id="inputProductName" onChange={handleChange} value={FormProduct.title} />
+          <input type="text" className="form-control" name="title" id="inputProductName" onChange={handleChange} value={FormProduct.title} style={{ textAlign: 'left', paddingLeft: '10px' }}/>
         </div>
         <div className="mb-3">
           <label htmlFor="inputProductDescription" className="form-label">Descrição do Produto:</label>
-          <textarea className="form-control" id="inputProductDescription" onChange={handleChange} value={FormProduct.description} name="description" rows="3"></textarea>
+          <textarea className="form-control" id="inputProductDescription" onChange={handleChange} value={FormProduct.description} name="description" rows="3" style={{ textAlign: 'left', paddingLeft: '10px' }}></textarea>
         </div>
         <div className="mb-3">
           <label htmlFor="inputProductType" className="form-label">Tipo do Produto:</label>

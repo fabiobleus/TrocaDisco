@@ -2,7 +2,8 @@ import Header from "../componentes/header"
 import Footer from "../componentes/footer"
 import "/src/index.css"
 import React, { useState } from 'react';
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
 
 const LoginUser = () => {
     const navigate = useNavigate();
@@ -75,12 +76,16 @@ const LoginUser = () => {
             <form className="form-container" style={{ maxWidth: '400px', width: '100%' }} onSubmit={handleSubmit}>
                 <div className="mb-3">
                     <label htmlFor="staticEmail2" className="form-label">Email:</label>
-                    <input type="email" className="form-control" id="staticEmail2" placeholder="email@example.com" onChange={handleChange} value={FormLogin.email} name="email" />
+                    <input type="email" className="form-control" id="staticEmail2" placeholder="email@example.com" onChange={handleChange} value={FormLogin.email} name="email" style={{ textAlign: 'left', paddingLeft: '10px' }}/>
                 </div>
 
                 <div className="mb-3">
                     <label htmlFor="inputPassword2" className="form-label">Senha:</label>
-                    <input type="password" className="form-control" id="inputPassword2" placeholder="Password" onChange={handleChange} value={FormLogin.password} name="password" />
+                    <input type="password" className="form-control" id="inputPassword2" placeholder="Password" onChange={handleChange} value={FormLogin.password} name="password" style={{ textAlign: 'left', paddingLeft: '10px' }}/>
+                </div>
+
+                <div>
+                    <p>Esqueceu a senha? <Link to="/forgot-password">Clique aqui</Link></p>
                 </div>
 
                 <div className="d-grid">

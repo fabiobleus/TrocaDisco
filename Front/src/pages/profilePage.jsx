@@ -111,38 +111,38 @@ const ProfilePage = () => {
             <div className="mb-3">
               <label htmlFor="inputUserPhoto" className="form-label">Foto:</label>
               <input type="file" className="form-control" id="inputUserPhoto" onChange={handleFileChange} />
-              {userData.foto && <img src={userData.foto} alt="Foto do Usuário" className="img-fluid mt-2" />}
+              {userData.foto && <img src={userData.foto} alt="Foto do Usuário" className="img-fluid rounded mb-4 w-50" />}
             </div>
           </div>
           <div className="col-md-6">
             <form onSubmit={handleSubmit} className="form-container">
               <div className="mb-3">
                 <label htmlFor="inputNome" className="form-label">Nome:</label>
-                <input type="text" className="form-control" id="inputNome" name="name" value={userData.name} onChange={handleInputChange} />
+                <input type="text" className="form-control" id="inputNome" text-align="left" name="name" value={userData.name} onChange={handleInputChange} style={{ textAlign: 'left', paddingLeft: '10px' }} />
               </div>
               <div className="mb-3">
                 <label htmlFor="inputEmail" className="form-label">E-mail:</label>
-                <input type="email" className="form-control" id="inputEmail" name="email" value={userData.email} onChange={handleInputChange} />
+                <input type="email" className="form-control" id="inputEmail" name="email" value={userData.email} onChange={handleInputChange} style={{ textAlign: 'left', paddingLeft: '10px' }} />
               </div>
               <div className="mb-3">
                 <label htmlFor="inputEndereco" className="form-label">Endereço:</label>
-                <input type="text" className="form-control" id="inputEndereco" name="adress" value={userData.endereco} onChange={handleInputChange} />
+                <input type="text" className="form-control" id="inputEndereco" name="address" value={userData.address} onChange={handleInputChange}style={{ textAlign: 'left', paddingLeft: '10px' }} />
               </div>
               <div className="mb-3">
                 <label htmlFor="inputComplemento" className="form-label">Complemento:</label>
-                <input type="text" className="form-control" id="inputComplemento" name="complemento" value={userData.complemento} onChange={handleInputChange} />
+                <input type="text" className="form-control" id="inputComplemento" name="complemento" value={userData.complemento} onChange={handleInputChange} style={{ textAlign: 'left', paddingLeft: '10px' }} />
               </div>
               <div className="mb-3">
                 <label htmlFor="inputCidade" className="form-label">Cidade:</label>
-                <input type="text" className="form-control" id="inputCidade" name="city" value={userData.city} onChange={handleInputChange} />
+                <input type="text" className="form-control" id="inputCidade" name="city" value={userData.city} onChange={handleInputChange} style={{ textAlign: 'left', paddingLeft: '10px' }} />
               </div>
               <div className="mb-3">
                 <label htmlFor="inputEstado" className="form-label">Estado:</label>
-                <input type="text" className="form-control" id="inputEstado" name="uf" value={userData.uf} onChange={handleInputChange} />
+                <input type="text" className="form-control" id="inputEstado" name="uf" value={userData.uf} onChange={handleInputChange} style={{ textAlign: 'left', paddingLeft: '10px' }} />
               </div>
               <div className="mb-3">
                 <label htmlFor="inputCep" className="form-label">Cep:</label>
-                <input type="text" className="form-control" id="inputCep" name="cep" value={userData.cep} onChange={handleInputChange} />
+                <input type="text" className="form-control" id="inputCep" name="cep" value={userData.cep} onChange={handleInputChange} style={{ textAlign: 'left', paddingLeft: '10px' }} />
               </div>
               <div className="d-grid">
                 <button type="submit" className="btn btn-primary">Salvar Dados</button>
@@ -152,11 +152,11 @@ const ProfilePage = () => {
               <h3>Alterar Senha</h3>
               <div className="mb-3">
                 <label htmlFor="inputCurrentPassword" className="form-label">Senha Atual:</label>
-                <input type="password" className="form-control" id="inputCurrentPassword" name="currentPassword" value={passwordData.currentPassword} onChange={handlePasswordChange} />
+                <input type="password" className="form-control" id="inputCurrentPassword" name="currentPassword" value={passwordData.currentPassword} onChange={handlePasswordChange} style={{ textAlign: 'left', paddingLeft: '10px' }} />
               </div>
               <div className="mb-3">
                 <label htmlFor="inputNewPassword" className="form-label">Nova Senha:</label>
-                <input type="password" className="form-control" id="inputNewPassword" name="newPassword" value={passwordData.newPassword} onChange={handlePasswordChange} />
+                <input type="password" className="form-control" id="inputNewPassword" name="newPassword" value={passwordData.newPassword} onChange={handlePasswordChange}    />
               </div>
               <div className="d-grid">
                 <button type="submit" className="btn btn-primary">Alterar Senha</button>
@@ -165,7 +165,7 @@ const ProfilePage = () => {
           </div>
           {/* <div className="col-md-3">
             <h3>Seus Anúncios</h3>
-            {loading ? (
+            {/* {loading ? (
               <p>Carregando anúncios...</p>
             ) : (
               <ul className="list-group">
@@ -180,6 +180,7 @@ const ProfilePage = () => {
           </div> */}
         </div>
       </div>
+      <Footer />
     </div>
   );
 }
