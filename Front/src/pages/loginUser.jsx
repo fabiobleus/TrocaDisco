@@ -2,8 +2,10 @@ import Header from "../componentes/header"
 import Footer from "../componentes/footer"
 import "/src/index.css"
 import React, { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 
 const LoginUser = () => {
+    const navigate = useNavigate();
 
     const [FormLogin, setFormLogin] = useState({
         email: '',
@@ -48,7 +50,7 @@ const LoginUser = () => {
                     if (ret.token) {
                         const sol = ret.token;
                         localStorage.setItem('tokenTD', sol)
-                        // navigate('/product')
+                        navigate('/profile-page')
                     } else {
                         alert('Erro! Usuário ou senha Inválido.');
                     };

@@ -1,18 +1,21 @@
-import { json, redirect, useNavigate } from "react-router-dom";
+import { json, redirect, useNavigate,useParams } from "react-router-dom";
 import Header from "../componentes/header"
 import Footer from "../componentes/footer";
 import { useEffect, useState } from "react";
 
 const ProfilePage = () => {
+ 
+  auth: localStorage.getItem('tokenTD')
+  
   const [userData, setUserData] = useState({
-    nome: '',
+    name: '',
     email: '',
     endereco: '',
     complemento: '',
-    cidade: '',
-    estado: '',
+    city: '',
+    uf: '',
     cep: '',
-    foto: ''
+    photo: ''
   });
   const [anuncios, setAnuncios] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -20,7 +23,14 @@ const ProfilePage = () => {
     currentPassword: '',
     newPassword: ''
   });
+  const options = {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/JSON',
+      auth: localStorage.getItem('tokenTD')
 
+    }
+  };
   useEffect(() => {
     // Fetch user data and ads from the API
     fetchUserData();
@@ -29,14 +39,16 @@ const ProfilePage = () => {
 
   const fetchUserData = async () => {
     // Fetch user data from API
-    const response = await fetch('http://localhost:5000/api/user');
+    const response = await fetch('http://localhost:3000/api/user/' , options );
     const data = await response.json();
     setUserData(data);
   };
 
   const fetchUserAds = async () => {
+    
+
     // Fetch user ads from API
-    const response = await fetch('http://localhost:5000/api/user/ads');
+    const response = await fetch('http://localhost:3000/api/product/user/' , options );
     const data = await response.json();
     setAnuncios(data);
     setLoading(false);
@@ -106,7 +118,7 @@ const ProfilePage = () => {
             <form onSubmit={handleSubmit} className="form-container">
               <div className="mb-3">
                 <label htmlFor="inputNome" className="form-label">Nome:</label>
-                <input type="text" className="form-control" id="inputNome" name="nome" value={userData.nome} onChange={handleInputChange} />
+                <input type="text" className="form-control" id="inputNome" name="name" value={userData.name} onChange={handleInputChange} />
               </div>
               <div className="mb-3">
                 <label htmlFor="inputEmail" className="form-label">E-mail:</label>
@@ -114,7 +126,7 @@ const ProfilePage = () => {
               </div>
               <div className="mb-3">
                 <label htmlFor="inputEndereco" className="form-label">Endereço:</label>
-                <input type="text" className="form-control" id="inputEndereco" name="endereco" value={userData.endereco} onChange={handleInputChange} />
+                <input type="text" className="form-control" id="inputEndereco" name="adress" value={userData.endereco} onChange={handleInputChange} />
               </div>
               <div className="mb-3">
                 <label htmlFor="inputComplemento" className="form-label">Complemento:</label>
@@ -122,11 +134,11 @@ const ProfilePage = () => {
               </div>
               <div className="mb-3">
                 <label htmlFor="inputCidade" className="form-label">Cidade:</label>
-                <input type="text" className="form-control" id="inputCidade" name="cidade" value={userData.cidade} onChange={handleInputChange} />
+                <input type="text" className="form-control" id="inputCidade" name="city" value={userData.city} onChange={handleInputChange} />
               </div>
               <div className="mb-3">
                 <label htmlFor="inputEstado" className="form-label">Estado:</label>
-                <input type="text" className="form-control" id="inputEstado" name="estado" value={userData.estado} onChange={handleInputChange} />
+                <input type="text" className="form-control" id="inputEstado" name="uf" value={userData.uf} onChange={handleInputChange} />
               </div>
               <div className="mb-3">
                 <label htmlFor="inputCep" className="form-label">Cep:</label>
@@ -151,7 +163,7 @@ const ProfilePage = () => {
               </div>
             </form>
           </div>
-          <div className="col-md-3">
+          {/* <div className="col-md-3">
             <h3>Seus Anúncios</h3>
             {loading ? (
               <p>Carregando anúncios...</p>
@@ -165,7 +177,7 @@ const ProfilePage = () => {
                 ))}
               </ul>
             )}
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
