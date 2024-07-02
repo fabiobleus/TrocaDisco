@@ -1,0 +1,172 @@
+{
+	"info": {
+		"_postman_id": "828a6f73-f09c-4384-8601-1e3f60a938fb",
+		"name": "TrocaDisco",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "35326206"
+	},
+	"item": [
+		{
+			"name": "Criar Usuario",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"asdasd\",\"email\":\"fabiolosteiro@gmail.com\",\"password\":\"ad\",\"cpf\":\"\",\"birthdate\":\"\",\"uf\":\"\",\"city\":\"dada\",\"cep\":\"\",\"address\":\"adasd\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3000/api/user"
+			},
+			"response": []
+		},
+		{
+			"name": "Logar",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"fabio.infor@terra.com.br\",\r\n    \"password\": \"123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3000/api/login"
+			},
+			"response": []
+		},
+		{
+			"name": "Criar Anúncio",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "auth",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOiI2NjY4ZWMyMzE5Mjg3MmM4ZTk3NzI3MTgiLCJpYXQiOjE3MTkyNzI3MDMsImV4cCI6MTcxOTI3NjMwM30.f619zM6nKeHezPBobozsruYInGsL3KaZ-u_PNULi7ko",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"idUser\":\"6668ec23192872c8e9772718\"\r\n    ,\"title\": \"the rolling stones four kicks\"\r\n    , \"description\": \"O melhor disco dos Stones em uma versão TOPP\"\r\n    , \"interest\": \"Dark Side of the Moon em LP (vinil)\"\r\n    , \"category\": \"Vinil\"\r\n    , \"status\" : \"Ativo\"\r\n    , \"photo\": [\"rollingstones.jpg\"]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3000/api/product"
+			},
+			"response": []
+		},
+		{
+			"name": "Busca todos anuncios",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:3000/api/products"
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar anuncio por id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:3000/api/product/6674bed4836d0757c02a8d4f"
+			},
+			"response": []
+		},
+		{
+			"name": "Busca Anuncio titulo",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:3000/api/Advert/name/hear"
+			},
+			"response": []
+		},
+		{
+			"name": "Busca Usuario",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:3000/api/user/fabio.info@terra.com.br"
+			},
+			"response": []
+		},
+		{
+			"name": "Deleta Produto",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3000/api/product/6674bc39987169f1ae8a0a0f"
+			},
+			"response": []
+		},
+		{
+			"name": "Criar Prosposta",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"idProduct\": \"6674bc39987169f1ae8a0a0f\",\r\n    \"idProductUser\": \"6668ec23192872c8e9772718\",\r\n    \"idUserProposal\":\"66749e6856d09bd9ac85e4ac\",\r\n    \"description\"   : \"Troca o disco por um saco de pamonha sasdasd?\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3000/api/proposal"
+			},
+			"response": []
+		},
+		{
+			"name": "Altera Proposta",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"_id\":\"6678605706ba42323ef8aa78\",\r\n    \"conversation\": {\r\n        \"id\": 2,\r\n        \"text\": \"lalalala\"\r\n    }\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3000/api/proposal"
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar produto categoria",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:3000/api/product/category/cd"
+			},
+			"response": []
+		}
+	]
+}

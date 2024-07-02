@@ -1,0 +1,38 @@
+/* Defina o tamanho fixo do carrossel */
+
+
+.carousel {
+
+    width: 1250px;
+    height: 620px;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 50px;
+   
+}
+
+/* Define que as imagens dentro do carrossel também tenham tamanho fixo */
+.carousel-inner {
+    display: flex;
+    transition: transform 0.5s ease;
+    width: 100%;
+    height: 100%;
+}
+
+.carousel-item {
+    min-width: 100%;
+    height: 100%;
+}
+
+/* que as imagens não aumentem de tamanho */
+.carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: none; /* Desabilita qualquer transição que possa estar aumentando a imagem */
+}
+
+.carousel-control-prev, .carousel-control-next {
+    width: 50px;
+    height: 650px;
+}
