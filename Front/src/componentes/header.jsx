@@ -47,7 +47,7 @@ const Header = () => {
               <input className="form-control mr-sm-1" type="text" placeholder="Procura pelos títulos" name="titleProduct" onChange={handleChange} value={searchTitle.titleProduct} />
             </div>
 
-            <button className="btn btn-primary my-1 my-sm-0 ml-2" type='button'>Buscar</button>
+            <button className="btn btn-primary my-1 my-sm-0 ml-2" type='button' disabled={!searchTitle.titleProduct} onClick={handleSubmit}>Buscar</button>
           </form>
 
           <div className='buttons'>

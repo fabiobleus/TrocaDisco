@@ -152,11 +152,11 @@ const ProfilePage = () => {
               <h3>Alterar Senha</h3>
               <div className="mb-3">
                 <label htmlFor="inputCurrentPassword" className="form-label">Senha Atual:</label>
-                <input type="password" className="form-control" id="inputCurrentPassword" name="currentPassword" value={passwordData.currentPassword} onChange={handlePasswordChange} style={{ textAlign: 'left', paddingLeft: '10px' }} />
+                <input type="password" className="form-control" id="inputCurrentPassword" name="currentPassword" value={passwordData.currentPassword} onChange={handlePasswordChange} />
               </div>
               <div className="mb-3">
                 <label htmlFor="inputNewPassword" className="form-label">Nova Senha:</label>
-                <input type="password" className="form-control" id="inputNewPassword" name="newPassword" value={passwordData.newPassword} onChange={handlePasswordChange}    />
+                <input type="password" className="form-control" id="inputNewPassword" name="newPassword" value={passwordData.newPassword} onChange={handlePasswordChange} />
               </div>
               <div className="d-grid">
                 <button type="submit" className="btn btn-primary">Alterar Senha</button>

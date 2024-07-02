@@ -80,11 +80,7 @@ const LoginUser = () => {
 
                 <div className="mb-3">
                     <label htmlFor="inputPassword2" className="form-label">Senha:</label>
-                    <input type="password" className="form-control" id="inputPassword2" placeholder="Password" onChange={handleChange} value={FormLogin.password} name="password" style={{ textAlign: 'left', paddingLeft: '10px' }}/>
-                </div>
-
-                <div>
-                    <p>Esqueceu a senha? <a href="/forgot-password">Clique aqui</a></p>
+                    <input type="password" className="form-control" id="inputPassword2" placeholder="Password" onChange={handleChange} value={FormLogin.password} name="password" />
                 </div>
 
                 <div className="d-grid">

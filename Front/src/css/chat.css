@@ -1,0 +1,11 @@
+.proposals{
+    border: 1px solid black;
+
+};
+.seller{
+    background-color: sandybrown;
+}
+.buyer{
+
+    text-align: right;
+}

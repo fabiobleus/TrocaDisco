@@ -27,7 +27,7 @@ export const productUpdate = async (req, res) => {
         const { _id, idUser, title, description, interest, type, category, status, photo } = req.body;
         // const product = await productModel.updateOne({ _id: _id} , {$set : {  title : title, description : description, interest:interest, type: type, category: category, status: status , photo : photo }});
         // const product = await productModel.updateOne({ _id: _id} , {$set : {  title : title, description : description, interest:interest, type: type, category: category, status: status , photo : photo }});
-        const product = await productModel.updateOne ({_id:id},{ title, description, interest, type, category, status, photo });
+        const product = await productModel.updateOne({_id: id},{ title, description, interest, type, category, status, photo });
         res.status(201).json({ product: product._id });
     } catch (error) {
         res.status(500).json({ error: error.message });
