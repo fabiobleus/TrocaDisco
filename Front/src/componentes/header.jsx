@@ -2,6 +2,7 @@ import './header.css';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import  logotipo  from '/src/assets/logotipo.png'
+import  logotipo  from '/src/assets/logotipo.png'
 const Header = () => {
 
   const navigate = useNavigate();
