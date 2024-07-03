@@ -1,20 +1,54 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import Header from '../componentes/header';
-import Footer from '../componentes/footer';
+import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from 'react';
+import { useParams } from "react-router-dom"
+import Header from "../componentes/header"
+import Footer from "../componentes/footer"
 import '../pages/product.css';
+import '../css/chat.css';
 
 const Product = () => {
-  const [useProduct, setUseProduct] = useState({});
+  const [useProduct, setUseProduct] = useState([]);
+  
+  const [useId, setUseId] = useState('');
   const [usePhoto, setUsePhoto] = useState({});
   const [useSeller, setUseSeller] = useState({});
   const [useProposal, setUseProposal] = useState({});
-  const [useConversation, setUseConversation] = useState({});
+  const [useConversation, setUseConversation] = useState([]);
   const [useMakeProposal, setUseMakeProposal] = useState(false);
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(null);  
+  const [useMensage, setUseMensage] = useState('');
   const { id } = useParams();
   const navigate = useNavigate();
+  const params = useParams();
+  let photo = [];
+  const changeMensage = (event) => {
+    setUseMensage(event.target.value)
+};
+const handleSendMensage = () => {
+    const conversation = useConversation;
+    conversation.push({ user: "buyer", message: useMensage })
+    setUseConversation(conversation)
 
+    const FormJson = { _id: useId, conversation: conversation };
+    const bodyJson = JSON.stringify(FormJson);
+    const options = {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/JSON',
+            auth: localStorage.getItem('tokenTD')
+        },
+        body: bodyJson
+    };
+    fetch(`http://localhost:3000/api/proposal`, options)
+        .then(async (response) => {
+            setUseMakeProposal(!useMakeProposal)
+        }
+        )
+        .catch((err) => {
+            console.log(err);
+        })
+
+};
   useEffect(() => {
     const fetchProduct = async () => {
       const tokenTD = localStorage.getItem('tokenTD');
@@ -60,6 +94,8 @@ const Product = () => {
     fetchProduct();
   }, [id, navigate]);
 
+  
+  
   const base64ToFile = (base64String) => {
     const [mimePart, dataPart] = base64String.split(',');
     const mimeType = mimePart.match(/:(.*?);/)[1];
@@ -120,6 +156,7 @@ const Product = () => {
       );
     }
 
+
     return (
       <div className="mb-4 text-center">
         <button className="btn btn-primary w-75 ms-1" onClick={handleProposal}>
@@ -151,8 +188,7 @@ const Product = () => {
                 <div className="col-md-3 mb-3" key={index}>
                   <div
                     className="card image-card"
-                    onMouseEnter={() => setSelectedImage(base64ToFile(photo.base64))}
-                  >
+                    onMouseEnter={() => setSelectedImage(base64ToFile(photo.base64))}                  >
                     <img
                       src={base64ToFile(photo.base64)}
                       className="img-fluid rounded w-100"
@@ -178,7 +214,44 @@ const Product = () => {
                 {useSeller.cep} / {useSeller.city} / {useSeller.uf}
               </h3>
             </div>
-            {renderProposals()}
+            {!useProposal && useMakeProposal == false && (
+                            <div className="mb-4 text-center">
+                                <button className="btn btn-primary w-75 ms-1" onClick={handleProposal} key={'buttonProposal'}>Fazer Proposta</button>
+                            </div>)}
+
+
+                        {!useProposal && useMakeProposal == true && (
+                            <div>
+                                <label htmlFor="proposalInput1" className="form-label">Insira sua proposta para este Anúncio:</label>
+                                <input type="text" className="form-control mb-3" id="proposalInput1" onChange={changeMensage} value={useMensage} placeholder="Insira sua proposta" />
+                                
+                                <button className="btn btn-success w-100 ms-0" >Enviar Proposta</button>
+                            </div>)}
+
+                        {useProposal && (
+                            <>
+                                <div >
+                                    <h1>Proposta</h1>
+                                    <div className="proposals" id="proposals">
+                                        {useConversation.map((proposal, index) => (
+                                            <>
+                                                <div key={index} className={proposal.user}>
+                                                    <p>{proposal.message}</p>
+                                                </div>
+                                            </>
+                                        ))
+                                        }
+
+                                    </div >
+                                    <label htmlFor="proposalInput2" className="form-label">Mande uma mensagem</label>
+                                    <input type="text" className="form-control mb-3" id="proposalInput2" placeholder="Insira a mensagem!" onChange={changeMensage} value={useMensage} />
+                                    <button className="btn btn-success w-100 ms-0" onClick={handleSendMensage}>Enviar Mensagem</button>
+                                </div>
+                            </>
+                        )
+                        }
+
+
           </div>
         </div>
       </div>
